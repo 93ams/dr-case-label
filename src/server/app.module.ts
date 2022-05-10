@@ -4,12 +4,15 @@ import { AppController } from './app.controller'
 import { CoreModule } from './core/core.module'
 import { BssModule } from './bss/bss.module'
 import { AppService } from './app.service'
+import { AppCommand } from './app.command'
 import { RenderModule } from 'nest-next'
 import Next from 'next'
 
 declare const module: any
 
-@Module({})
+@Module({
+  providers: [AppCommand],
+})
 export class AppModule {
   public static initialize(): DynamicModule {
     const renderModule =
