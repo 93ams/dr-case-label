@@ -6,6 +6,9 @@ import { RenderModule } from 'nest-next'
 import Next from 'next'
 import { UsersModule } from './users/users.module'
 import { AuthModule } from './auth/auth.module'
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
+import { GraphQLModule } from '@nestjs/graphql'
+import { join } from 'path'
 
 declare const module: any
 
@@ -26,7 +29,15 @@ export class AppModule {
 
     return {
       module: AppModule,
-      imports: [renderModule, UsersModule, AuthModule],
+      imports: [
+        renderModule,
+        UsersModule,
+        AuthModule,
+        GraphQLModule.forRoot<ApolloDriverConfig>({
+          driver: ApolloDriver,
+          autoSchemaFile: join(process.cwd(), 'src/shared/schema.gql'),
+        }),
+      ],
       controllers: [AppController],
       providers: [AppService],
     }
