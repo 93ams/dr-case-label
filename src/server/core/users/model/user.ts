@@ -5,10 +5,9 @@ export class User {
     public userId: number,
     public username: string,
     public password: string,
-    public roles: Role[],
+    public roles?: Role[],
   ) {}
-
   get isAdmin(): boolean {
-    return this.roles.includes(Role.Admin)
+    return this.roles?.includes(Role.Admin) || false
   }
 }

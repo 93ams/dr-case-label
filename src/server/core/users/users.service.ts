@@ -4,16 +4,8 @@ import { User } from './model/user'
 @Injectable()
 export class UsersService {
   private readonly users: User[] = [
-    {
-      userId: 1,
-      username: 'john',
-      password: 'changeme',
-    },
-    {
-      userId: 2,
-      username: 'maria',
-      password: 'guess',
-    },
+    new User(1, 'john', 'changeme'),
+    new User(2, 'maria', 'guess'),
   ]
 
   async findOne(username: string) {

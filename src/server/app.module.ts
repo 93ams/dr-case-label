@@ -1,15 +1,10 @@
 import { DynamicModule, Module } from '@nestjs/common'
 import { NODE_ENV } from 'src/shared/constants/env'
 import { AppController } from './app.controller'
+import { CoreModule } from './core/core.module'
 import { AppService } from './app.service'
 import { RenderModule } from 'nest-next'
 import Next from 'next'
-import { UsersModule } from './users/users.module'
-import { AuthModule } from './auth/auth.module'
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
-import { GraphQLModule } from '@nestjs/graphql'
-import { join } from 'path'
-import { CaslModule } from './casl/casl.module'
 
 declare const module: any
 
@@ -30,18 +25,9 @@ export class AppModule {
 
     return {
       module: AppModule,
-      imports: [
-        renderModule,
-        UsersModule,
-        AuthModule,
-        CaslModule,
-        GraphQLModule.forRoot<ApolloDriverConfig>({
-          driver: ApolloDriver,
-          autoSchemaFile: join(process.cwd(), 'src/shared/schema.gql'),
-        }),
-      ],
-      controllers: [AppController],
       providers: [AppService],
+      controllers: [AppController],
+      imports: [renderModule, CoreModule],
     }
   }
 }
