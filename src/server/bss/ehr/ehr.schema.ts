@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import mongoose, { Document } from 'mongoose'
+import { Document } from 'mongoose'
 
 export type EHRDocument = EHR & Document
 
@@ -8,7 +8,7 @@ export class EHR {
   @Prop({ required: true })
   description: string
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Owner' })
+  @Prop({ required: true })
   owner: number
 
   constructor(owner: number, description: string) {
