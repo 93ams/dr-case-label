@@ -1,8 +1,17 @@
+import { PORT } from 'src/shared/constants/env'
+import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
-import { CommandFactory } from 'nest-commander'
+
+declare const module: any
 
 async function bootstrap() {
-  await CommandFactory.run(AppModule)
+  const app = await NestFactory.create(AppModule)
+  await app.listen(PORT)
+
+  if (module.hot) {
+    module.hot.accept()
+    module.hot.dispose(() => app.close())
+  }
 }
 
 bootstrap()
