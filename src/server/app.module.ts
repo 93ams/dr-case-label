@@ -4,6 +4,8 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { RenderModule } from 'nest-next'
 import Next from 'next'
+import { UsersModule } from './users/users.module'
+import { AuthModule } from './auth/auth.module'
 
 declare const module: any
 
@@ -24,7 +26,7 @@ export class AppModule {
 
     return {
       module: AppModule,
-      imports: [renderModule],
+      imports: [renderModule, UsersModule, AuthModule],
       controllers: [AppController],
       providers: [AppService],
     }
