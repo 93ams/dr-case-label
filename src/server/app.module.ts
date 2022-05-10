@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { GraphQLModule } from '@nestjs/graphql'
 import { join } from 'path'
+import { CaslModule } from './casl/casl.module'
 
 declare const module: any
 
@@ -33,6 +34,7 @@ export class AppModule {
         renderModule,
         UsersModule,
         AuthModule,
+        CaslModule,
         GraphQLModule.forRoot<ApolloDriverConfig>({
           driver: ApolloDriver,
           autoSchemaFile: join(process.cwd(), 'src/shared/schema.gql'),
