@@ -2,6 +2,7 @@ import { DynamicModule, Module } from '@nestjs/common'
 import { NODE_ENV } from 'src/shared/constants/env'
 import { AppController } from './app.controller'
 import { CoreModule } from './core/core.module'
+import { BssModule } from './bss/bss.module'
 import { AppService } from './app.service'
 import { RenderModule } from 'nest-next'
 import Next from 'next'
@@ -27,7 +28,7 @@ export class AppModule {
       module: AppModule,
       providers: [AppService],
       controllers: [AppController],
-      imports: [renderModule, CoreModule],
+      imports: [renderModule, CoreModule, BssModule],
     }
   }
 }
