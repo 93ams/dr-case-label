@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import MainLayout from '../client/component/layout/main'
 import { Grid, TextField, Typography } from '@mui/material'
+import { ConditionList } from '../client/component/organism'
 
 const Home: FC = () => {
   return (
@@ -16,6 +17,7 @@ const Home: FC = () => {
           <Typography sx={{ marginBottom: '15px', marginLeft: '5px' }}>
             Select Condition
           </Typography>
+          <ConditionList />
         </Grid>
       </Grid>
     </MainLayout>
