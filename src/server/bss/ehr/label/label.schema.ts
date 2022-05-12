@@ -6,15 +6,15 @@ export type LabelDocument = Label & Document
 @Schema()
 export class Label {
   @Prop({ required: true })
-  ehr: number
+  ehr: string
 
   @Prop({ required: true })
-  doctor: number
+  doctor: string
 
   @Prop({ required: true })
-  condition: number
+  condition: string
 
-  constructor(ehr: number, condition: number, doctor: number) {
+  constructor(ehr: string, condition: string, doctor: string) {
     this.condition = condition
     this.doctor = doctor
     this.ehr = ehr
@@ -22,3 +22,12 @@ export class Label {
 }
 
 export const LabelSchema = SchemaFactory.createForClass(Label)
+LabelSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: function (doc, ret) {
+    ret.id = ret._id
+    delete ret._id
+    delete ret.__v
+  },
+})

@@ -2,19 +2,19 @@ import { Field, Int, ObjectType } from '@nestjs/graphql'
 
 @ObjectType()
 export class Label {
-  @Field(() => Int, { nullable: false })
-  id: number
+  @Field({ nullable: false })
+  id: string
 
   @Field(() => Int, { nullable: false })
-  ehr: number
+  ehr: string
 
   @Field(() => Int, { nullable: false })
-  condition: number
+  condition: string
 
   @Field(() => Int, { nullable: false })
-  doctor: number
+  doctor: string
 
-  constructor(id: number, doctor: number, ehr: number, condition: number) {
+  constructor(id: string, doctor: string, ehr: string, condition: string) {
     this.condition = condition
     this.doctor = doctor
     this.ehr = ehr

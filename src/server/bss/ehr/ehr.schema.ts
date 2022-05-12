@@ -18,3 +18,12 @@ export class EHR {
 }
 
 export const EHRSchema = SchemaFactory.createForClass(EHR)
+EHRSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: function (doc, ret) {
+    ret.id = ret._id
+    delete ret._id
+    delete ret.__v
+  },
+})
