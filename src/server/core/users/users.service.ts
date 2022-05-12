@@ -7,11 +7,11 @@ import { Model } from 'mongoose'
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-  async findOneByUsername(username: string): Promise<UserDocument | undefined> {
-    const user = await this.userModel
-      .findOne({ username: username.toLowerCase() })
-      .exec()
-    if (user) return user
-    return undefined
+  findOneByUsername(username: string) {
+    return this.userModel.findOne({ username: username.toLowerCase() }).exec()
+  }
+
+  create(username: string, password: string) {
+    return this.userModel.create({ username, password })
   }
 }

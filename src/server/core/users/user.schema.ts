@@ -37,7 +37,13 @@ UserSchema.methods.checkPassword = function (
     )
   })
 }
-
+UserSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: function (doc, ret) {
+    delete ret.password
+  },
+})
 UserSchema.pre<UserDocument>('save', function (next) {
   const user = this
   user.username = user.username.toLowerCase()
