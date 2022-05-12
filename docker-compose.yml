@@ -4,7 +4,4 @@ services:
   mongodb:
     image: mongo:5.0
     ports:
-      - 27017:27017
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=u532
-      - MONGO_INITDB_ROOT_PASSWORD=53c237
+      - '27017:27017'
