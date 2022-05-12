@@ -18,3 +18,13 @@ export class Condition {
 }
 
 export const ConditionSchema = SchemaFactory.createForClass(Condition)
+
+ConditionSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: function (doc, ret) {
+    ret.id = ret._id
+    delete ret._id
+    delete ret.__v
+  },
+})

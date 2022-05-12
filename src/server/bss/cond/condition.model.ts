@@ -1,17 +1,17 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql'
+import { Field, ObjectType } from '@nestjs/graphql'
 
 @ObjectType()
 export class Condition {
-  @Field((type) => Int)
-  id: number
+  @Field()
+  id: string
 
-  @Field({ nullable: false })
-  code: string
+  @Field({ nullable: true })
+  code?: string
 
-  @Field({ nullable: false })
+  @Field()
   description: string
 
-  constructor(id: number, code: string, description: string) {
+  constructor(id: string, code: string, description: string) {
     this.description = description
     this.code = code
     this.id = id

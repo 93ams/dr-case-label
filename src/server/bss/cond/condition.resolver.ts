@@ -6,12 +6,14 @@ import { Args, Int, Query, Resolver } from '@nestjs/graphql'
 export class ConditionsResolver {
   constructor(private conditionsService: ConditionsService) {}
 
-  @Query(() => Condition)
+  @Query(() => [Condition])
   async conditions() {
-    return this.conditionsService.list()
+    const ret = await this.conditionsService.list()
+    console.log(ret)
+    return ret
   }
-  @Query((returns) => Condition)
-  async condition(@Args('id', { type: () => Int }) id: number) {
+  @Query(() => Condition)
+  async condition(@Args('id') id: string) {
     return this.conditionsService.findOneById(id)
   }
 }

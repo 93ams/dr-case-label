@@ -10,6 +10,7 @@ import { ConditionsResolver } from './condition.resolver'
       { name: Condition.name, schema: ConditionSchema },
     ]),
   ],
+  exports: [ConditionsService],
   providers: [ConditionsService, ConditionsResolver],
 })
 export class ConditionModule {}

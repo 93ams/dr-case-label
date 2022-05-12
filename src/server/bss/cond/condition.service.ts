@@ -9,10 +9,22 @@ export class ConditionsService {
     @InjectModel(Condition.name)
     private conditionModel: Model<ConditionDocument>,
   ) {}
+
   async list() {
-    return this.conditionModel.find()
+    return this.conditionModel
+      .find()
+      .then((conditions) => conditions?.map(mapCondition))
   }
-  async findOneById(id: number) {
-    return this.conditionModel.findById(id)
+
+  async findOneById(id: string) {
+    return this.conditionModel
+      .findById(id)
+      .then((condition) => (condition ? mapCondition(condition) : condition))
   }
 }
+
+const mapCondition = ({ id, code, description }: ConditionDocument) => ({
+  id,
+  code,
+  description,
+})
