@@ -1,5 +1,5 @@
 import { ConditionsService } from './condition.service'
-import { Condition } from './condition.model'
+import { Condition } from '../../../shared/graphql/condition.model'
 import { Args, Int, Query, Resolver } from '@nestjs/graphql'
 
 @Resolver(() => Condition)
