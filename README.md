@@ -13,5 +13,5 @@ $ npm install
 ```bash
 docker-compose up -d
 npm run build
-npm run start [port|8080]
+npm run start -- -p [port]
 ```
