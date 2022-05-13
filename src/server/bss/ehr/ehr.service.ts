@@ -5,5 +5,13 @@ import { EHR, EHRDocument } from './ehr.schema'
 
 @Injectable()
 export class EHRsService {
-  constructor(@InjectModel(EHR.name) private catModel: Model<EHRDocument>) {}
+  constructor(@InjectModel(EHR.name) private ehrModel: Model<EHRDocument>) {}
+
+  findOneWithoutLabel() {
+    return this.ehrModel.findOne({ label: { $exists: false } })
+  }
+
+  labelRecord(id: string, label: string) {
+    return this.ehrModel.findByIdAndUpdate(id, { label })
+  }
 }

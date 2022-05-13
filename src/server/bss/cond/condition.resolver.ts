@@ -8,9 +8,7 @@ export class ConditionsResolver {
 
   @Query(() => [Condition])
   async conditions() {
-    const ret = await this.conditionsService.list()
-    console.log(ret)
-    return ret
+    return this.conditionsService.list()
   }
   @Query(() => Condition)
   async condition(@Args('id') id: string) {

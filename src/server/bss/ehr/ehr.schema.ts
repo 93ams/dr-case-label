@@ -7,13 +7,11 @@ export type EHRDocument = EHR & Document
 export class EHR {
   @Prop({ required: true })
   description: string
-
-  @Prop({ required: true })
-  owner: number
-
-  constructor(owner: number, description: string) {
+  @Prop()
+  label: string
+  constructor(description: string, label: string) {
     this.description = description
-    this.owner = owner
+    this.label = label
   }
 }
 

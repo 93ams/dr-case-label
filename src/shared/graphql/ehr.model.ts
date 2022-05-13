@@ -5,15 +5,15 @@ export class EHR {
   @Field()
   id: string
 
-  @Field()
-  owner: string
+  @Field(() => [String])
+  labels: string[]
 
   @Field({ nullable: false })
   description: string
 
-  constructor(id: string, owner: string, description: string) {
+  constructor(id: string, description: string, labels: string[]) {
     this.description = description
-    this.owner = owner
+    this.labels = labels
     this.id = id
   }
 }

@@ -7,5 +7,6 @@ import { EHRsResolver } from './ehr.resolver'
 @Module({
   imports: [MongooseModule.forFeature([{ name: EHR.name, schema: EHRSchema }])],
   providers: [EHRsService, EHRsResolver],
+  exports: [EHRsService],
 })
 export class EHRModule {}
