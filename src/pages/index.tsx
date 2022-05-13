@@ -1,23 +1,29 @@
-import { useState } from 'react'
-import MainLayout from '../client/component/layout/main'
 import { Box, Button, Grid, TextField, Typography } from '@mui/material'
 import { ConditionList } from '../client/component/organism'
+import MainLayout from '../client/component/layout/main'
 import { LABEL_RECORD } from '../shared/graphql/record'
-import { useMutation } from '@apollo/client'
 import { EHR } from '../shared/graphql/ehr.model'
-import { NextPageContext } from 'next'
+import { useMutation } from '@apollo/client'
+import {useEffect, useState} from 'react'
 
-export type Props = { record?: EHR }
-const Home = ({ record }: Props) => {
-  const [state, setState] = useState(record)
+const Home = () => {
+  const [state, setState] = useState<EHR>()
+  const [selected, select] = useState('')
   const [mutateFunction, { loading }] = useMutation<{ labelRecord: EHR }>(
     LABEL_RECORD,
     {
-      onCompleted: ({ labelRecord: nextRecord }) =>
-        setState(nextRecord || undefined),
+      onCompleted: ({ labelRecord: nextRecord }) =>{
+          setState(nextRecord || undefined)
+          select('')
+      },
     },
   )
-  const [selected, select] = useState('')
+  const mutate = () => mutateFunction({
+    variables: {
+      in: { ehr: state?.id, label: selected },
+    }
+  })
+  useEffect(() => {mutate().catch(console.error)}, [])
   return (
     <MainLayout>
       <Grid container spacing={2}>
@@ -51,13 +57,7 @@ const Home = ({ record }: Props) => {
           >
             <Button
               disabled={loading || (!!state && !selected)}
-              onClick={() =>
-                mutateFunction({
-                  variables: {
-                    in: { ehr: state?.id, label: selected },
-                  },
-                })
-              }
+              onClick={mutate}
             >
               {state ? 'Next Record' : 'Refresh'}
             </Button>
@@ -67,13 +67,4 @@ const Home = ({ record }: Props) => {
     </MainLayout>
   )
 }
-Home.getInitialProps = (ctx: NextPageContext) =>
-  ctx.query.id
-    ? {
-        record: {
-          description: ctx.query.description,
-          id: ctx.query.id,
-        },
-      }
-    : {}
 export default Home

@@ -17,7 +17,6 @@ type Condition {
 type Query {
   conditions: [Condition!]!
   condition(id: String!): Condition!
-  nextRecord: EHR!
 }
 
 type Mutation {

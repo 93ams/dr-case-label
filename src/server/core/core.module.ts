@@ -5,7 +5,7 @@ import { AuthModule } from './auth/auth.module'
 import { GraphQLModule } from '@nestjs/graphql'
 import { RenderModule } from 'nest-next'
 import { Module } from '@nestjs/common'
-import { cwd } from '../app.constants'
+import {cwd, NODE_ENV} from '../app.constants'
 import { join } from 'path'
 import Next from 'next'
 
@@ -13,7 +13,10 @@ import Next from 'next'
   imports: [
     UsersModule,
     AuthModule,
-    RenderModule.forRootAsync(Next({ dir: join(cwd, '../..') }), {
+    RenderModule.forRootAsync(Next({
+      dev: NODE_ENV !== 'production',
+      dir: join(cwd, '../..'),
+    }), {
       viewsDir: null,
     }),
     MongooseModule.forRoot('mongodb://localhost/nest'),

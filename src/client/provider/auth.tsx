@@ -31,8 +31,8 @@ export const AuthProvider = ({ children }: PropsWithChildren<any>) => {
   const [error, setError] = useState<string>()
   const router = useRouter()
   useEffect(() => {
-    if (!token) router.push('/auth')
-  }, [children, token])
+    if (!token) router.push('/auth').then(console.log).catch(console.error)
+  }, [token])
   useEffect(() => {
     setUsername(token ? (jwt.decode(token) as any).username : undefined)
   }, [token])
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }: PropsWithChildren<any>) => {
       })
         .then((res) => res.json())
         .then(({ access_token }) => setToken(access_token))
-        .then(() => router.push('/'))
+        .then(() => router.back())
         .catch(() => setError('invalid credentials'))
     },
     cleanError: () => setError(undefined),

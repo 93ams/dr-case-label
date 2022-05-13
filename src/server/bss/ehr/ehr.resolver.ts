@@ -13,12 +13,6 @@ export class EHRsResolver {
     }
 
     @UseGuards(GqlAuthGuard)
-    @Query(() => EHR)
-    async nextRecord() {
-        return this.ehrsService.findOneWithoutLabel()
-    }
-
-    @UseGuards(GqlAuthGuard)
     @Mutation(() => EHR, {nullable: true})
     async labelRecord(@CurrentUser() user: UserDocument, @Args('in') {ehr, label}: LabelInput) {
         if (ehr && label) {
