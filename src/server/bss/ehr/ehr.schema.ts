@@ -10,10 +10,13 @@ export class EHR {
   @Prop()
   label: string
   @Prop()
+  labeledBy: string
+  @Prop()
   updatedAt?: Date
-  constructor(description: string, label: string, updatedAt?: Date) {
+  constructor(description: string, label: string, labeledBy: string, updatedAt?: Date) {
     this.description = description
     this.updatedAt = updatedAt
+    this.labeledBy = labeledBy
     this.label = label
   }
 }
@@ -27,8 +30,4 @@ EHRSchema.set('toJSON', {
     delete ret._id
     delete ret.__v
   },
-})
-EHRSchema.pre<EHRDocument>( 'save', function(next) {
-  this.updatedAt = new Date()
-  next()
 })

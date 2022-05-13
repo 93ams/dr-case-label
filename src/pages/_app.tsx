@@ -23,7 +23,7 @@ const httpLink = createHttpLink({
   uri: '/graphql',
 })
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('APP_TOKEN')?.replace('"', '')
+  const token = localStorage.getItem('APP_TOKEN')?.replaceAll('"', '')
   return {
     headers: {
       ...headers,
