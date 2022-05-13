@@ -62,6 +62,5 @@ export const AuthProvider = ({ children }: PropsWithChildren<any>) => {
     token,
     error,
   }
-  console.log(username)
   return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>
 }
