@@ -1,4 +1,9 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import {
+  ApolloClient,
+  ApolloProvider,
+  createHttpLink,
+  InMemoryCache,
+} from '@apollo/client'
 import createEmotionCache from '../client/theme/emotion'
 import { ThemeProvider } from '../client/theme/provider'
 import { AuthProvider } from '../client/provider/auth'
@@ -7,15 +12,27 @@ import { EmotionCache } from '@emotion/cache'
 import { AppProps } from 'next/app'
 import theme from '../client/theme'
 import { FC } from 'react'
+import { setContext } from '@apollo/client/link/context'
 
 const clientSideEmotionCache = createEmotionCache()
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache
 }
-
+const httpLink = createHttpLink({
+  uri: '/graphql',
+})
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('APP_TOKEN')?.replace('"', '')
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  }
+})
 const client = new ApolloClient({
-  uri: 'https://localhost:3000/graphql',
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 })
 
