@@ -11,7 +11,7 @@ export class EHRsService {
     return this.ehrModel.findOne({ label: { $exists: false } })
   }
 
-  labelRecord(id: string, label: string) {
-    return this.ehrModel.findByIdAndUpdate(id, { label })
+  labelRecord(id: string, label: string, doctor: string) {
+    return this.ehrModel.findByIdAndUpdate(id, { label, doctor })
   }
 }

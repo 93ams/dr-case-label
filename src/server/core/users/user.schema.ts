@@ -12,17 +12,10 @@ export class User {
   username: string
   @Prop({ required: true })
   password: string
-  @Prop({ required: true })
-  roles?: Role[]
 
-  constructor(username: string, password: string, roles?: Role[]) {
+  constructor(username: string, password: string) {
     this.username = username
     this.password = password
-    this.roles = roles
-  }
-
-  get isAdmin(): boolean {
-    return this.roles?.includes(Role.Admin) || false
   }
 }
 
