@@ -17,7 +17,6 @@ const Home = ({ record }: Props) => {
         setState(nextRecord || undefined),
     },
   )
-  console.log(record)
   const [selected, select] = useState('')
   return (
     <MainLayout>
@@ -51,7 +50,7 @@ const Home = ({ record }: Props) => {
             }}
           >
             <Button
-              disabled={loading}
+              disabled={loading || (!!state && !selected)}
               onClick={() =>
                 mutateFunction({
                   variables: {

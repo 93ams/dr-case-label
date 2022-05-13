@@ -6,6 +6,7 @@ import { CaslModule } from './casl/casl.module'
 import { GraphQLModule } from '@nestjs/graphql'
 import { RenderModule } from 'nest-next'
 import { Module } from '@nestjs/common'
+import { cwd } from '../app.constants'
 import { join } from 'path'
 import Next from 'next'
 
@@ -14,13 +15,9 @@ import Next from 'next'
     UsersModule,
     AuthModule,
     CaslModule,
-    RenderModule.forRootAsync(
-      Next({
-        dev: process.env.NODE_ENV !== 'production',
-        dir: join(__dirname, '../..'),
-      }),
-      { viewsDir: null },
-    ),
+    RenderModule.forRootAsync(Next({ dir: join(cwd, '../..') }), {
+      viewsDir: null,
+    }),
     MongooseModule.forRoot('mongodb://localhost/nest'),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,

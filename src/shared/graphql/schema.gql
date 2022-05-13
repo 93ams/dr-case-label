@@ -2,15 +2,15 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Condition {
-  id: String!
-  code: String
-  description: String!
-}
-
 type EHR {
   id: String!
   labels: [String!]!
+  description: String!
+}
+
+type Condition {
+  id: String!
+  code: String
   description: String!
 }
 
