@@ -1,0 +1,14 @@
+{
+  "experimentalStudio": true,
+  "includeShadowDom": true,
+  "fixturesFolder": false,
+  "downloads": false,
+  "baseUrl": "http://localhost:3000",
+  "env": {
+    "mongodb": {
+      "uri": "mongodb://localhost:27017",
+      "database": "nest",
+      "collection": "collection_name"
+    }
+  }
+}

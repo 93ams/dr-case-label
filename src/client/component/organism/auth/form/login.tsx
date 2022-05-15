@@ -70,6 +70,7 @@ export const LoginForm = () => {
           </Typography>
         </Box>
         <Button
+          id='login'
           type="submit"
           fullWidth
           variant="contained"
