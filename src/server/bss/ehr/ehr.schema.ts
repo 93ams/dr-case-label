@@ -8,16 +8,13 @@ export class EHR {
   @Prop({ required: true })
   description: string
   @Prop()
-  label: string
+  labeledBy?: string
   @Prop()
-  labeledBy: string
+  label?: string
   @Prop()
-  updatedAt?: Date
-  constructor(description: string, label: string, labeledBy: string, updatedAt?: Date) {
+  ttl?: number
+  constructor(description: string) {
     this.description = description
-    this.updatedAt = updatedAt
-    this.labeledBy = labeledBy
-    this.label = label
   }
 }
 

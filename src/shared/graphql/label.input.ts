@@ -8,8 +8,6 @@ export class LabelInput {
   @Field({ nullable: true })
   label?: string
 
-  constructor(ehr?: string, label?: string) {
-    this.label = label
-    this.ehr = ehr
-  }
+  @Field({ nullable: true })
+  ttl?: Date
 }
