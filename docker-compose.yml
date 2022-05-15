@@ -7,3 +7,11 @@ services:
       - '27017:27017'
     volumes:
       - './data:/data/db'
+  service:
+    build: .
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_URL: 'mongodb'
