@@ -9,18 +9,20 @@ import {useEffect, useState} from 'react'
 const Home = () => {
   const [state, setState] = useState<EHR>()
   const [selected, select] = useState('')
+  const [startTime, setStartTime] = useState(Date.now())
   const [mutateFunction, { loading }] = useMutation<{ labelRecord: EHR }>(
     LABEL_RECORD,
     {
       onCompleted: ({ labelRecord: nextRecord }) =>{
           setState(nextRecord || undefined)
+          setStartTime(Date.now())
           select('')
       },
     },
   )
   const mutate = () => mutateFunction({
     variables: {
-      in: { ehr: state?.id, label: selected },
+      in: { ehr: state?.id, label: selected, ttl: Date.now() - startTime },
     }
   })
   useEffect(() => {mutate().catch(console.error)}, [])
