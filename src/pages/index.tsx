@@ -30,7 +30,7 @@ const Home = () => {
     <MainLayout>
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <Typography sx={{ marginBottom: '15px', marginLeft: '5px' }}>
+          <Typography sx={{ marginBottom: '15px', marginLeft: '5px' }} id='pageCommand'>
             {state ? 'Please Review This Case' : 'You are Done'}
           </Typography>
           <TextField
@@ -59,6 +59,7 @@ const Home = () => {
           >
             <Button
               disabled={loading || (!!state && !selected)}
+              id='submitButton'
               onClick={mutate}
             >
               {state ? 'Next Record' : 'Refresh'}

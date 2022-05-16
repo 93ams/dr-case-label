@@ -1,4 +1,4 @@
-import { Field, InputType } from '@nestjs/graphql'
+import {Field, InputType, Int} from '@nestjs/graphql'
 
 @InputType()
 export class LabelInput {
@@ -8,6 +8,6 @@ export class LabelInput {
   @Field({ nullable: true })
   label?: string
 
-  @Field({ nullable: true })
-  ttl?: Date
+  @Field(() => Int)
+  ttl: number = 0
 }

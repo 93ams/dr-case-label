@@ -6,7 +6,7 @@ Cypress.Commands.add("dataCy", (value, ...sub) =>
 
 Cypress.Commands.add('auth', () => {
     cy.get('#username').clear()
-    cy.get('#username').type('Dr Oetker')
+    cy.get('#username').type('Oetker')
     cy.get('#password').clear()
     cy.get('#password').type('not my password')
     return cy.get('#login').click()

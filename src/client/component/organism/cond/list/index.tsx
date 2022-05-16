@@ -23,6 +23,7 @@ export const ConditionList = ({ select, selected, disabled }: Props) => {
         overflow: 'hide',
         bgcolor: 'background.paper',
       }}
+      id='conditionList'
     >
       <FixedSizeList
         height={600}

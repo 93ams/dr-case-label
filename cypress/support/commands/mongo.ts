@@ -7,8 +7,8 @@ Cypress.Commands.add('insertManyFromMock', (collection, mock) =>
         database: 'nest',
         collection,
     }))
-Cypress.Commands.add('collection', (collection, mock) =>
-    cy.findMany({}, {collection}).then((vals) => {
-        if (!vals) return cy.insertManyFromMock(collection, mock)
+Cypress.Commands.add('collection', <T>(collection, mock) =>
+    cy.findMany({}, {collection}).then((vals:T[]) => {
+        if (!vals || !vals.length) return cy.insertManyFromMock(collection, mock)
         return vals
     }))

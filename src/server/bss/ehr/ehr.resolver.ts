@@ -14,9 +14,9 @@ export class EHRsResolver {
 
     @UseGuards(GqlAuthGuard)
     @Mutation(() => EHR, {nullable: true})
-    async labelRecord(@CurrentUser() user: UserDocument, @Args('in') {ehr, label}: LabelInput) {
+    async labelRecord(@CurrentUser() user: UserDocument, @Args('in') {ehr, label, ttl}: LabelInput) {
         if (ehr && label) {
-            await this.ehrsService.labelRecord(ehr, label, user.id)
+            await this.ehrsService.labelRecord(ehr, label, user.id, ttl)
         }
         return this.ehrsService.findOneWithoutLabel()
     }
